@@ -17,10 +17,10 @@ class _StatusPageState extends State<StatusPage> {
 
   final List<Map<String, dynamic>> _livePages = [
     {
-      'image': ['assets/images/user1.png', 'assets/images/user2.png', 'assets/images/user3.png'],
+      'image': ['assets/images/user1.png', 'assets/images/user2.png', 'assets/images/user3.png', 'assets/images/user1.png', 'assets/images/user2.png',],
     },
     {
-      'image': ['assets/images/user1.png', 'assets/images/user2.png', 'assets/images/user3.png'],
+      'image': ['assets/images/user1.png', 'assets/images/user2.png', 'assets/images/user3.png', 'assets/images/user1.png', 'assets/images/user2.png',],
 
     },
   ];

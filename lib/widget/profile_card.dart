@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:luvit/widget/progresscount.dart';
 import 'package:luvit/widget/word_card.dart';
+import 'package:provider/provider.dart';
+import '../provider/luvit_provider.dart';
 import 'default_card_border.dart';
 
 class ProfileCard extends StatefulWidget {
@@ -19,6 +21,13 @@ class _ProfileCardState extends State<ProfileCard> {
   final ScrollController _controller = ScrollController();
   final controller = PageController();
   int activeIndex = 0;
+  LuvItProvider luvItProvider = LuvItProvider();
+
+  @override
+  void initState() {
+    luvItProvider = context.read<LuvItProvider>();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -228,10 +237,8 @@ class _ProfileCardState extends State<ProfileCard> {
             scrollDirection: Axis.horizontal,
             physics: const BouncingScrollPhysics(),
             controller: controller,
-            onPageChanged: (index){
-              setState(() {
-                activeIndex = index;
-              });
+            onPageChanged: (i){
+              luvItProvider.setPosition = i;
             },
             children: List.generate(
               widget.images.length,
@@ -293,7 +300,7 @@ class _ProfileCardState extends State<ProfileCard> {
                                 ],
                               ),
 
-                              activeIndex.isOdd ? activeIndex == 1 ? Row(
+                              Provider.of<LuvItProvider>(context, listen: true).activeIndex.isOdd ? Provider.of<LuvItProvider>(context, listen: true).activeIndex == 1 ? Row(
                                 children: [
                                   SizedBox(
                                     width: screenWidth * 0.6,
@@ -568,7 +575,7 @@ class _ProfileCardState extends State<ProfileCard> {
            Positioned(
             top: 15,
             left: 35,
-            child: ProgressCount(activeIndex, widget.images.length),
+            child: ProgressCount(Provider.of<LuvItProvider>(context, listen: true).activeIndex, widget.images.length),
           ),
         ],
       ),
